@@ -24,6 +24,12 @@
     "appId": "org.zalepa.fine_art_wallpaper",
     "productName": "Fine Art Wallpaper",
     "icon": "build/icon.png",
+    "extraResources": [
+      {
+        "from": "oss.txt",
+        "to": "oss.txt"
+      }
+    ],
     "mac": {
       "category": "public.app-category.utilities",
       "icon": "build/icon.png"

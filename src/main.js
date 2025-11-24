@@ -81,7 +81,11 @@ function buildMenu() {
         {
           label: 'Open Source Licenses',
           click: () => {
-            shell.openExternal('https://raw.githubusercontent.com/zalepa/fine_art_wallpaper/refs/heads/main/oss.txt');
+            // In production, file is in resources folder; in dev, it's in repo root
+            const ossPath = app.isPackaged
+              ? path.join(process.resourcesPath, 'oss.txt')
+              : path.join(__dirname, '..', 'oss.txt');
+            shell.openPath(ossPath);
           }
         },
         { type: 'separator' },
