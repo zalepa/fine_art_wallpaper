@@ -1,12 +1,40 @@
 {
-  "name": "fineartwallpaper",
+  "name": "fine_art_wallpaper",
   "version": "1.0.0",
-  "description": "A fine art wallpaper switcher for macOS",
-  "main": "src/index.js",
+  "description": "A fine art wallpaper switcher",
+  "main": "src/main.js",
   "scripts": {
-    "test": "make test"
+    "start": "electron .",
+    "build": "electron-builder",
+    "oss": "yarn licenses generate-disclaimer > oss.txt"
   },
-  "keywords": ["fine art", "wallpaper", "background"],
+  "keywords": [
+    "fine art",
+    "wallpaper",
+    "background"
+  ],
   "author": "George Zalepa",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "generate-license-file": "^4.1.1"
+  },
+  "build": {
+    "appId": "org.zalepa.fine_art_wallpaper",
+    "productName": "Fine Art Wallpaper",
+    "icon": "build/icon.png",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon.png"
+    }
+  }
 }
