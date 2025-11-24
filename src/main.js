@@ -81,7 +81,7 @@ function buildMenu() {
         {
           label: 'Open Source Licenses',
           click: () => {
-            shell.openExternal('https://github.com/zalepa/fine_art_wallpaper/oss.txt');
+            shell.openExternal('https://raw.githubusercontent.com/zalepa/fine_art_wallpaper/refs/heads/main/oss.txt');
           }
         },
         { type: 'separator' },
