@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
+    "release": "electron-builder --publish always",
     "oss": "yarn licenses generate-disclaimer > oss.txt"
   },
   "keywords": [
@@ -20,10 +21,19 @@
     "electron-builder": "^24.9.1",
     "generate-license-file": "^4.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zalepa/fine_art_wallpaper.git"
+  },
   "build": {
     "appId": "org.zalepa.fine_art_wallpaper",
     "productName": "Fine Art Wallpaper",
     "icon": "build/icon.png",
+    "publish": {
+      "provider": "github",
+      "owner": "zalepa",
+      "repo": "fine_art_wallpaper"
+    },
     "extraResources": [
       {
         "from": "oss.txt",
