@@ -75,31 +75,24 @@ jobs:
         run: ls -la dist/
 
       - name: Delete existing release (if exists)
-        run: gh release delete "v${{ steps.version.outputs.VERSION }}" --yes || true
+        run: gh release delete "v${{ steps.version.outputs.VERSION }}" --cleanup-tag --yes || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete existing tag (if exists)
-        run: git push origin :refs/tags/v${{ steps.version.outputs.VERSION }} || true
+      - name: Create release and upload assets
+        run: |
+          gh release create "v${{ steps.version.outputs.VERSION }}" \
+            --title "Fine Art Wallpaper v${{ steps.version.outputs.VERSION }}" \
+            --notes "## Fine Art Wallpaper v${{ steps.version.outputs.VERSION }}
 
-      - name: Create or update release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.version.outputs.VERSION }}
-          name: Fine Art Wallpaper v${{ steps.version.outputs.VERSION }}
-          draft: false
-          prerelease: false
-          files: dist/*
-          body: |
-            ## Fine Art Wallpaper v${{ steps.version.outputs.VERSION }}
+          ### Downloads
+          - **macOS**: \`.dmg\` file
+          - **Windows**: \`.exe\` installer
+          - **Linux**: \`.AppImage\` file
 
-            ### Downloads
-            - **macOS**: `.dmg` file
-            - **Windows**: `.exe` installer
-            - **Linux**: `.AppImage` file
-
-            ### Art Sources
-            - Metropolitan Museum of Art
-            - Art Institute of Chicago
+          ### Art Sources
+          - Metropolitan Museum of Art
+          - Art Institute of Chicago" \
+            dist/*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
